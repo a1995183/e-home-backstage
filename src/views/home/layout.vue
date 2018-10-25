@@ -10,16 +10,22 @@
                 background-color="#333"
                 text-color="#fff"
                 active-text-color="#ffd04b">
+                <el-menu-item-group>
+                  <router-link to="/home">
+                    <el-menu-item index="1-1" >首页</el-menu-item>
+                  </router-link>
+                </el-menu-item-group>
                 <el-submenu index="1">
                 <template slot="title">
-                <i class="el-icon-location"></i>
                 <span>用户管理</span>
                 </template>
                 <el-menu-item-group>
                   <router-link to="/userList">
                     <el-menu-item index="1-1" >管理员列表</el-menu-item>
                   </router-link>
-                <el-menu-item index="1-2">选项2</el-menu-item>
+                  <router-link to="/addUser">
+                <el-menu-item index="1-2">添加管理员</el-menu-item>
+                  </router-link>
                 </el-menu-item-group>
                 <el-submenu index="1-4">
                 <template slot="title">选项4</template>

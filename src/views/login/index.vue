@@ -25,6 +25,10 @@ export default {
                 let form={idCardNumber:this.username,pwd:this.password}
                 this.$axios.post('/login',form).then(res=>{
                     console.log(res)
+                    let token = res.token
+                    localStorage.setItem('token',token)
+                    console.log(localStorage.getItem('token'))
+                    // console.log(localStorage.removeItem('token'))
                     if(res.code==200){
                         this.$message.success('登录成功')
                         this.$store.commit('CHANGE_userInfo',res.userInfo)

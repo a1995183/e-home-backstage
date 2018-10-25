@@ -21,6 +21,11 @@ Vue.use(Router)
           path:'userList',
           name:'用户列表',
           component:()=>import('@/views/user/userList.vue')
+        },
+        {
+          path:'addUser',
+          name:'adduser',
+          component:()=>import('@/views/user/adduser'),
         }
       ]
     },
@@ -28,7 +33,8 @@ Vue.use(Router)
       path:'/login',
       name:'login',
       component:()=>import('@/views/login'),
-    }
+    },
+   
   ]
 })
 router.beforeEach((to,from,next)=>{
