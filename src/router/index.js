@@ -26,7 +26,27 @@ Vue.use(Router)
           path:'addUser',
           name:'adduser',
           component:()=>import('@/views/user/adduser'),
-        }
+        },
+        {
+          path:'userEdit',
+          name:'userEdit',
+          component:()=>import('@/views/user/userEdit'),
+        },
+        // {
+        //   path:'/addNews',
+        //   name:'addNews',
+        //   component:()=>import('@/views/news/addNewsList'),
+        // },
+        {
+          path:'/addCategory',
+          name:'addCategory',
+          component:()=>import('@/views/news/addCategory'),
+        },
+        {
+          path:'/newsList',
+          name:'newsList',
+          component:()=>import('@/views/news/newsList'),
+        },
       ]
     },
     {
@@ -34,6 +54,7 @@ Vue.use(Router)
       name:'login',
       component:()=>import('@/views/login'),
     },
+  
    
   ]
 })

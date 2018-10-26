@@ -14,7 +14,16 @@ const $axios={
     })
     },
     post(url,data,config,method='post'){
-        return new Promise((resolve,reject)=>{instance[method](url,data,config).then(
+        let token = localStorage.getItem('token')
+        let configheader={...config}
+        if(token){
+            configheader={
+                headers:{
+                    'token':token
+                }
+            }
+        }
+        return new Promise((resolve,reject)=>{instance[method](url,data,configheader).then(
             res=>{
                 resolve(res.data)
             }

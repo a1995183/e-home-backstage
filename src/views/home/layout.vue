@@ -31,7 +31,26 @@
                 <template slot="title">选项4</template>
                 <el-menu-item index="1-4-1">选项1</el-menu-item>
                 </el-submenu>
-                </el-submenu>
+                </el-submenu >
+                <el-submenu index='2'>
+                  <template>
+                    <span slot="title">新闻管理</span>
+                  </template>
+                  <el-menu-item-group>
+                    <router-link to="/">
+                      <el-menu-item index="2-1" >新闻列表</el-menu-item>
+                    </router-link>
+                  </el-menu-item-group>
+                  <el-submenu index="2-1">
+                    <template slot="title">分类管理</template>
+                      <router-link to="/addCategory">
+                        <el-menu-item index="2-1-1" >添加分类</el-menu-item>
+                      </router-link>
+                      <router-link to="/addCategory">
+                        <el-menu-item index="2-1-1" >分类列表</el-menu-item>
+                      </router-link>
+                  </el-submenu>
+                  </el-submenu>
                 </el-menu>
             </div></el-col>
             <el-col :span="21"><div class="grid-content bg-purple2">
@@ -53,7 +72,11 @@
           <img class="user-avatar" :src="userInfo.avatar"><i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item><el-button @click="clearLogin" type="danger">退出登录</el-button></el-dropdown-item>
+          <el-dropdown-item>
+            <p>欢迎登录:<span>{{userInfo.name}}</span></p>
+            <p class="personal-id">{{userInfo.level==1?'用户':'管理员'}}</p>
+            <el-button @click="clearLogin" type="danger">退出登录</el-button>
+          </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         
@@ -114,7 +137,9 @@ import {mapState} from 'vuex'
           transform: translateX(-50%);
       }
   }
-
+.el-col-3{
+  min-width: 210px;
+}
   .bg-purple {
     background: #333;
   }
@@ -154,5 +179,11 @@ import {mapState} from 'vuex'
       height: 33px;
       border-radius: 50%;
     }
+    .personal-id{
+      color:red;
+      margin-right: 20px;
+      text-align: center;
+    }
   }
+
 </style>

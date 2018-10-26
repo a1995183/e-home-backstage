@@ -1,7 +1,7 @@
 <template>
     <div>
-        adduser
-        <div>
+        userEdit
+         <div>
             <div style="margin: 20px;"></div>
             <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
                 <el-form-item label="用户头像">
@@ -48,68 +48,53 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm">提交</el-button>
-                    <el-button @click="resetForm">重置</el-button>
                 </el-form-item>
             </el-form>
         </div>
     </div>
 </template>
+
 <script>
 import uploadAvatar from '@/components/upload-avatar'
-export default {
+    export default {
     components:{
-        uploadAvatar
+    uploadAvatar
     },
-    data(){
-        return{
-            formData:{
-                avatar:"http://oowantxlb.bkt.clouddn.com/upload/front/00ca764dc423e0a48764c25aec2fd940.png",
-                userName:'',
-                idCardNumber:'',
-                sex:1,
-                pwd:'',
-                phone:'',
-                phrase:'',
-                level:'',
-                token:''
-                
-            },
-            labelPosition: 'left',
-            formLabelAlign: {
+        data(){
+            return{
+                formData:{},
+                labelPosition: 'left',
+                formLabelAlign: {
                 name: '',
                 region: '',
                 type: ''
-            }
-        }
-    },
-    methods:{
-        getdata(){
-        },
-        submitForm(){
-            let token=localStorage.getItem('token')
-            if(token){
-                this.formData.token=token
-                
-            }
-            this.$axios.post('/add',this.formData).then(res=>{
-                if(res.code==200){
-                    this.$message(res.msg)
-                    setTimeout(()=>{
-                        this.$router.push('/userList')
-                    },500)
-                }else{
-                    this.$message.error(res.msg)
                 }
-        })
+            }
         },
-        resetForm(){
-            this.formData=''
+        methods:{
+            getData(){
+                if(this.$route.params.value){
+                    localStorage.setItem('user_id',this.$route.params.value)
+                    let Params={idCardNumber:id}
+                }
+                    let id = localStorage.getItem('user_id')
+                this.$axios.get(`/getUser?idCardNumber=${id}`).then(res=>{
+                    if(res.code==200){
+                        this.formData=res.data
+                    }
+                })
+            },
+            submitForm(){
+                this.$axios.post('/updataUser',this.formData).then(res=>{
+                        this.$message(res.json)
+                // localStorage.removeItem('user_id')
+                })
+            }
+        },
+        created(){
+            this.getData()
         }
-    },
-    created(){
-    this.getdata()
-    },
-}
+    }
 </script>
 <style lang="scss" scoped>
 .el-input{

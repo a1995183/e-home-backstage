@@ -28,18 +28,13 @@ export default {
     },
     methods: {
       handleSuccess(res,file) {
-         this.imageUrl = URL.createObjectURL(file.raw);
+         this.imageUrl =res.url;
         this.$emit('input',this.imageUrl)
-        console.log(res)
-        console.log(file)
-        console.log(this.imageUrl)
       },
       getToken(){
           this.$axios.get('http://upload.yaojunrong.com/getToken')
           .then(res=>{
-              if(res.code==200){
                   this.formData.token=res.data
-              }
         })  
       }
     },
@@ -76,5 +71,8 @@ text-align: center;
 width: 178px;
 height: 178px;
 display: block;
+}
+/deep/.avatar-uploader-icon{
+    border:1px solid #ddd;
 }
 </style>
